@@ -14,6 +14,6 @@ This will take approximately 2.5 min depending on the machine you use.
 
 ## Example usage
 
-You can try the example data present in the example folder. There is prepared example outputs present in the /example_data/example_outputs folder.
+You can try the example data present in the example folder. There is prepared example outputs present in the /ExampleData/Output/ folder.
 The expected runtime on normal desktop computers (around 16GB of RAM and 16 cores) depends on the script used and ranges up to 30 min for the registration step.
-To run the scripts on your own acquired data, you just need to change the `path_input` and `path_output` variables in each script.
+To run the scripts on your own acquired data, you just need to change the `path_data` and `path_save` variables in each script.
