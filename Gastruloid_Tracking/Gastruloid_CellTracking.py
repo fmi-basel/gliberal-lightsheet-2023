@@ -14,25 +14,23 @@ import pandas as pd
 import seaborn as sb
 
 
-plot_save_vio = "path/to/save/Violinplot.pdf"
+path_save = "/ExampleData/Output/Velocity_Violinplot_Gastruloid.pdf"
 
+path_data_42_1 = "/ExampleData/Gastruloid/42h/P2-Spot.csv"
+path_data_42_2 = "/ExampleData/Gastruloid/42h/P5-Spot.csv"
+path_data_42_3 = "/ExampleData/Gastruloid/42h/P6-Spot.csv"
 
-path_42_1 = "path/to/csv/42h-P1-Spot.csv"
-path_42_2 = "path/to/csv/42h-P2-Spot.csv"
-path_42_3 = "path/to/csv/42h-P3-Spot.csv"
+path_data_66_1 = "/ExampleData/Gastruloid/66h/P2-Spot.csv"
+path_data_66_2 = "/ExampleData/Gastruloid/66h/P3-Spot.csv"
+path_data_66_3 = "/ExampleData/Gastruloid/66h/P4-Spot.csv"
 
-path_66_1 = "path/to/csv/66h-P1-Spot.csv"
-path_66_2 = "path/to/csv/66h-P2-Spot.csv"
-path_66_3 = "path/to/csv/66h-P3-Spot.csv"
+path_data_90_1 = "/ExampleData/Gastruloid/90h/P4-Spot.csv"
+path_data_90_2 = "/ExampleData/Gastruloid/90h/P8-Spot.csv"
+path_data_90_3 = "/ExampleData/Gastruloid/90h/P9-Spot.csv"
 
-path_90_1 = "path/to/csv/90h-P1-Spot.csv"
-path_90_2 = "path/to/csv/90h-P2-Spot.csv"
-path_90_3 = "path/to/csv/90h-P3-Spot.csv"
-
-
-path_42 = [path_42_1,path_42_2,path_42_3]
-path_66 = [path_66_1,path_66_2,path_66_3]
-path_90 = [path_90_1,path_90_2,path_90_3]
+path_42 = [path_data_42_1,path_data_42_2,path_data_42_3]
+path_66 = [path_data_66_1,path_data_66_2,path_data_66_3]
+path_90 = [path_data_90_1,path_data_90_2,path_data_90_3]
 
 
 cell_tracks_42 = []
@@ -135,7 +133,7 @@ for label in ticklabels:
 plt.ylabel(r"v [$\mu$m/h]", fontsize = 25)
 
 plt.tight_layout()
-plt.savefig(plot_save_vio, bbox_inches = "tight")
+plt.savefig(path_save, bbox_inches = "tight")
 plt.show()
 plt.close()
 

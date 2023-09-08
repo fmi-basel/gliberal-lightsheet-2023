@@ -25,12 +25,12 @@ import sys
 
 
 # Specify one stack of View1 and View2 to calculate the registration matrix
-view1 = "/path/to/View1/View1.tif"
-view2 = "/path/to/View2/View2.tif"
+view1 = "/ExampleData/Organoid/Position 1/View1/H2B_View1-T0132.tif"
+view2 = "/ExampleData/Organoid/Position 1/View2/H2B_View2-T0132.tif"
 
 
-path_data = "path/to/data/"
-positions = ["Position 1","Position 2"]
+path_data = "/ExampleData/Organoid/"
+positions = ["Position 1"]
 
 
 static = tif.imread(view1)

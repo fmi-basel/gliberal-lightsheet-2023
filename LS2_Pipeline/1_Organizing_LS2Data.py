@@ -11,11 +11,10 @@
 import os
 
 
-path_data = "path/to/data/"
-positions = ["Position 1","Position 2"]
-          
+path_data = "/ExampleData/Organoid/"
+positions = ["Position 1"]
 
-folders_create = ["View1","View2","View2Reg","Fusion","MIP","Fusion_Shift","MIP_Shift"]
+folders_create = ["View1","View2","View2Reg","Fusion"]
 
 for pos in positions:
     path_pos = path_data + pos + "/"

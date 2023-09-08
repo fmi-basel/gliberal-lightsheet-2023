@@ -18,24 +18,24 @@ import matplotlib as mpl
 
 
 
-plot_save = "/path/saving/"
+path_save = "/ExampleData/Output/"
+
+path_data_42_1 = "/ExampleData/Gastruloid/42h/P2-Spot.csv"
+path_data_42_2 = "/ExampleData/Gastruloid/42h/P5-Spot.csv"
+path_data_42_3 = "/ExampleData/Gastruloid/42h/P6-Spot.csv"
+
+path_data_66_1 = "/ExampleData/Gastruloid/66h/P2-Spot.csv"
+path_data_66_2 = "/ExampleData/Gastruloid/66h/P3-Spot.csv"
+path_data_66_3 = "/ExampleData/Gastruloid/66h/P4-Spot.csv"
+
+path_data_90_1 = "/ExampleData/Gastruloid/90h/P4-Spot.csv"
+path_data_90_2 = "/ExampleData/Gastruloid/90h/P8-Spot.csv"
+path_data_90_3 = "/ExampleData/Gastruloid/90h/P9-Spot.csv"
 
 
-path_42_1 = "path/to/csv/42h-P1-Spot.csv"
-path_42_2 = "path/to/csv/42h-P2-Spot.csv"
-path_42_3 = "path/to/csv/42h-P3-Spot.csv"
-
-path_66_1 = "path/to/csv/66h-P1-Spot.csv"
-path_66_2 = "path/to/csv/66h-P2-Spot.csv"
-path_66_3 = "path/to/csv/66h-P3-Spot.csv"
-
-path_90_1 = "path/to/csv/90h-P1-Spot.csv"
-path_90_2 = "path/to/csv/90h-P2-Spot.csv"
-path_90_3 = "path/to/csv/90h-P3-Spot.csv"
-
-path_42 = [path_42_1,path_42_2,path_42_3]
-path_66 = [path_66_1,path_66_2,path_66_3]
-path_90 = [path_90_1,path_90_2,path_90_3]
+path_42 = [path_data_42_1,path_data_42_2,path_data_42_3]
+path_66 = [path_data_66_1,path_data_66_2,path_data_66_3]
+path_90 = [path_data_90_1,path_data_90_2,path_data_90_3]
 
 
 
@@ -137,7 +137,7 @@ ax.xaxis.set_tick_params(labelsize=15)
 ax.set_box_aspect(aspect=None, zoom=0.8)
 
 plt.tight_layout()
-plt.savefig(plot_save + "42h-Tracjectories.pdf", bbox_inches = "tight")
+plt.savefig(path_save + "42h-Tracjectories.pdf", bbox_inches = "tight")
 plt.show()
 
 
@@ -229,7 +229,7 @@ ax.xaxis.set_tick_params(labelsize=15)
 ax.set_box_aspect(aspect=None, zoom=0.8)
 
 plt.tight_layout()
-plt.savefig(plot_save + "66h-Tracjectories.pdf", bbox_inches = "tight") 
+plt.savefig(path_save + "66h-Tracjectories.pdf", bbox_inches = "tight") 
 plt.show()
     
 
@@ -318,7 +318,7 @@ ax.xaxis.set_tick_params(labelsize=15)
 ax.set_box_aspect(aspect=None, zoom=0.8)
 
 plt.tight_layout()
-plt.savefig(plot_save + "90h-Tracjectories.pdf",  bbox_inches = "tight")
+plt.savefig(path_save + "90h-Tracjectories.pdf",  bbox_inches = "tight")
 plt.show()
 
 
@@ -362,8 +362,6 @@ x_val = [(i/6) for i in range(0,len(MSD_42_sum))]
 
 
 
-
-
 fig = plt.figure(figsize=(7,5)) 
 ax = fig.add_subplot(1,1,1) 
 
@@ -382,7 +380,7 @@ for labelss in ticklabels:
 plt.legend(fontsize = 25)
 
 plt.tight_layout()
-plt.savefig(plot_save + "Ensemble_MSD.pdf",  bbox_inches = "tight")
+plt.savefig(path_save + "Ensemble_MSD.pdf",  bbox_inches = "tight")
 plt.show()
 
 

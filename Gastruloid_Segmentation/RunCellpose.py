@@ -28,16 +28,15 @@ def do_cellpose(datapath, savepath):
             
     
 
-path_data = "/path/to/data/"
-positions = ["Position 1_2um"]
+path_data = "/ExampleData/Gastruloid/42h/"
+positions = ["Position 2"]
 
 
-path_model = "/path/cellpose_model/"
+path_model = "/ExampleData/Gastruloid/Lck_membrane_42h66h90h"
 model = models.CellposeModel(gpu=True, pretrained_model = path_model)
 
 
 for pos in positions:
-    path_pos_data = os.path.join(path_data,pos,"crop")
-    path_pos_save = os.path.join(path_data,pos,"Masks")
-    
+    path_pos_data = os.path.join(path_data,pos,"Stack")
+    path_pos_save = "/ExampleData/Output/Masks/"   
     do_cellpose(path_pos_data, path_pos_save)

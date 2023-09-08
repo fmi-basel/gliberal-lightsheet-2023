@@ -14,12 +14,11 @@ import matplotlib.colors
 import matplotlib as mpl
 
 
-path_csv = "path/to/csv/MastodonTable-Spot.csv"
-path_save =  "path/save/plot/Intensity_over_time.pdf"
+path_data = "/ExampleData/Organoid/MastodonTable-Spot.csv"
+path_save =  "/ExampleData/Output/Intensity_over_time.pdf"
 
 
-
-df_fucci = pd.read_csv(path_csv, skiprows=[1,2], encoding= 'unicode_escape')
+df_fucci = pd.read_csv(path_data, skiprows=[1,2], encoding= 'unicode_escape')
 
 track_ids = df_fucci["Spot track ID"].unique()
 frames = df_fucci["Spot frame"].unique()
@@ -30,7 +29,7 @@ max_f = max(frames)/6
 df_fucci["norm_vec"] = np.nan
 
 
-track_ids = [1,2,3]
+track_ids = [5,24,13]
 
 norm = mpl.colors.Normalize(vmin = 0, vmax = 1)
 colors = [mpl.cm.Blues(norm(i)) for i in np.linspace(0.2, 1, len(track_ids))]
@@ -73,5 +72,3 @@ plt.tight_layout()
 plt.savefig(path_save, bbox_inches = "tight")
 plt.show()
 plt.close()
-
-

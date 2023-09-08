@@ -15,14 +15,11 @@ import numpy as np
 import os
 
 
-path_save_csv = "/path/save/csv/"
+path_save = "/ExampleData/Output/"
 
+path_data = "/ExampleData/Gastruloid/42h/"
+positions = ["Position 2"]
 
-path_data = "/path/to/data/"
-positions = ["Position 1_2um","Position 2_2um"]
-
-
-savename_dataframe = "df_gastruloid.csv"
 
 
 def surface_area_marchingcube(regionmask):
@@ -34,8 +31,8 @@ def surface_area_marchingcube(regionmask):
 
 
 for pos in positions:
-    path_raw_data = os.path.join(path_data,pos,"crop")
-    path_seg_data = os.path.join(path_data,pos,"Masks")
+    path_raw_data = os.path.join(path_data,pos,"Stack")
+    path_seg_data = "/ExampleData/Output/Masks/"  
 
     # generating file list
     file_list = sorted(os.listdir(path_raw_data))
@@ -63,4 +60,4 @@ for pos in positions:
         else:
             df_lck = pd.concat([df_lck, mem_features], axis = 0)
         
-df_lck.to_csv(path_save_csv + savename_dataframe)
+df_lck.to_csv(path_save + "df_gastruloid.csv")

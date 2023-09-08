@@ -4,8 +4,10 @@
 ##############################################################################
 #                                                                            #
 # Author: Franziska Moos              <franziska.moos@fmi.ch>                #
+# Author: Petr Strnad                 <petr.strnad@viventis-microscopy.com>  #
+# Author: Camille Remy                                                       #
 #                                                                            #
-##############################################################################""
+##############################################################################
 
 import numpy
 from scipy import fftpack
@@ -50,13 +52,9 @@ pixel_size = 0.406
 reality_factor = 1.5 
 r_psf = reality_factor*(0.61*wavelength/NA)
 
-stopper = 1
 
-i = 1
-
-path_data = "/path/to/data/"
-path_save = "/path/to/save/"
-
+path_data = "/ExampleData/DCT/"
+path_save = "/ExampleData/Output/"
 
 dct_1 = []
 dct_2 = []
@@ -67,10 +65,8 @@ for stack in os.listdir(path_data):
     stack_img_1 = tif.imread(view1)
     plot_save = stack.replace(".tif", ".png")
     plot_save = os.path.join(path_save, plot_save)
-    print(stack)
-    
 
-    
+     
     dims = stack_img_1.shape
     
     y_dim = dims[1]
@@ -114,72 +110,35 @@ for stack in os.listdir(path_data):
         stack_img_1_calc = stack_img_1
     
     
-    if "View1" in stack:
-        for frame in range(dims[0]):  
+    for frame in range(dims[0]):  
 
-            stopper = 1
-            r_psf_pxl = r_psf/pixel_size
-            bin_factor = r_psf_pxl//0.5
-            r_psf_pxl_bin = r_psf_pxl / bin_factor
-            
-            binned_image = rebin(stack_img_1_calc[frame], bin_factor)
-            width, _ = numpy.shape(binned_image)
+        stopper = 1
+        r_psf_pxl = r_psf/pixel_size
+        bin_factor = r_psf_pxl//0.5
+        r_psf_pxl_bin = r_psf_pxl / bin_factor
         
-            Fc = fftpack.dct(fftpack.dct(binned_image.T, norm='ortho').T, norm='ortho')
-            
-            L2 = 0
-            for x in range(width):
-                for y in range(width):
-                    if x+y < int(width/r_psf_pxl_bin):
-                        L2 += Fc[x,y]**2
-            L2 = numpy.sqrt(L2)
-            FL = Fc/L2
-            DCTentr = -(2/(width/r_psf_pxl_bin)**2)*numpy.sum(numpy.abs(FL)*(numpy.log2(numpy.abs(FL))))
+        binned_image = rebin(stack_img_1_calc[frame], bin_factor)
+        width, _ = numpy.shape(binned_image)
+    
+        Fc = fftpack.dct(fftpack.dct(binned_image.T, norm='ortho').T, norm='ortho')
+        
+        L2 = 0
+        for x in range(width):
+            for y in range(width):
+                if x+y < int(width/r_psf_pxl_bin):
+                    L2 += Fc[x,y]**2
+        L2 = numpy.sqrt(L2)
+        FL = Fc/L2
+        DCTentr = -(2/(width/r_psf_pxl_bin)**2)*numpy.sum(numpy.abs(FL)*(numpy.log2(numpy.abs(FL))))
+        if "View1" in stack:
             dct_1.append(DCTentr)
-   
-    if "View2" in stack:
-        for frame in range(dims[0]): 
-            
-            r_psf_pxl = r_psf/pixel_size
-            bin_factor = r_psf_pxl//0.5
-            r_psf_pxl_bin = r_psf_pxl / bin_factor
-            
-            
-            binned_image = rebin(stack_img_1_calc[frame], bin_factor)
-            width, _ = numpy.shape(binned_image)
-        
-            Fc = fftpack.dct(fftpack.dct(binned_image.T, norm='ortho').T, norm='ortho')
-            
-            L2 = 0
-            for x in range(width):
-                for y in range(width):
-                    if x+y < int(width/r_psf_pxl_bin):
-                        L2 += Fc[x,y]**2
-            L2 = numpy.sqrt(L2)
-            FL = Fc/L2
-            DCTentr = -(2/(width/r_psf_pxl_bin)**2)*numpy.sum(numpy.abs(FL)*(numpy.log2(numpy.abs(FL))))
+        if "View2" in stack:
             dct_2.append(DCTentr)
-            
-    if "Fused" in stack:
-        for frame in range(dims[0]):  
-            r_psf_pxl = r_psf/pixel_size
-            bin_factor = r_psf_pxl//0.5
-            r_psf_pxl_bin = r_psf_pxl / bin_factor
-            
-            binned_image = rebin(stack_img_1_calc[frame], bin_factor)
-            width, _ = numpy.shape(binned_image)
-        
-            Fc = fftpack.dct(fftpack.dct(binned_image.T, norm='ortho').T, norm='ortho')
-            
-            L2 = 0
-            for x in range(width):
-                for y in range(width):
-                    if x+y < int(width/r_psf_pxl_bin):
-                        L2 += Fc[x,y]**2
-            L2 = numpy.sqrt(L2)
-            FL = Fc/L2
-            DCTentr = -(2/(width/r_psf_pxl_bin)**2)*numpy.sum(numpy.abs(FL)*(numpy.log2(numpy.abs(FL))))
+        if "Fused" in stack:
             dct_f.append(DCTentr)
+             
+            
+
 
 dct_1 = numpy.asarray(dct_1)
 dct_1 = dct_1 * 1000
@@ -195,23 +154,46 @@ for i in range(len(dct_1)):
 
 
 fig = plt.figure(figsize=(8,7))                                                               
-ax = fig.add_subplot(1,1,1) 
-  
-plt.plot(x,dct_2, linewidth = 8, color = "green", label = "View 2")
-
-
+ax = fig.add_subplot(1,1,1)  
+plt.plot(x,dct_1, linewidth = 4, color = "black", label = "View 1")
 ticklabels = ax.get_xticklabels() + ax.get_yticklabels()
 for label in ticklabels:
     label.set_fontsize(30)
 
-plt.ylim(0.5,3.4)
 plt.xlabel(r"Z Section [$\mu$m]", fontsize = 30)
 plt.ylabel(r"DCT Score [$\cdot10^3$]", fontsize = 30)
 plt.tight_layout()
-plt.savefig(path_save + "View2.pdf", bbox_inches = "tight")
+plt.savefig(path_save + "DCT_View1.pdf", bbox_inches = "tight")
+plt.show()
+plt.close()
+
+fig = plt.figure(figsize=(8,7))                                                               
+ax = fig.add_subplot(1,1,1)  
+plt.plot(x,dct_2, linewidth = 4, color = "black", label = "View 2")
+ticklabels = ax.get_xticklabels() + ax.get_yticklabels()
+for label in ticklabels:
+    label.set_fontsize(30)
+
+plt.xlabel(r"Z Section [$\mu$m]", fontsize = 30)
+plt.ylabel(r"DCT Score [$\cdot10^3$]", fontsize = 30)
+plt.tight_layout()
+plt.savefig(path_save + "DCT_View2.pdf", bbox_inches = "tight")
 plt.show()
 plt.close()
     
+fig = plt.figure(figsize=(8,7))                                                               
+ax = fig.add_subplot(1,1,1)  
+plt.plot(x,dct_f, linewidth = 4, color = "black", label = "Fused")
+ticklabels = ax.get_xticklabels() + ax.get_yticklabels()
+for label in ticklabels:
+    label.set_fontsize(30)
+
+plt.xlabel(r"Z Section [$\mu$m]", fontsize = 30)
+plt.ylabel(r"DCT Score [$\cdot10^3$]", fontsize = 30)
+plt.tight_layout()
+plt.savefig(path_save + "DCT_Fused.pdf", bbox_inches = "tight")
+plt.show()
+plt.close()
 
 
 

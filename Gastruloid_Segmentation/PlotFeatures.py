@@ -13,14 +13,13 @@ import matplotlib.pylab as plt
 import seaborn as sb
 
 
-path_csv = "/path/to/data/"
-path_save = "/path/save/plots/"
+path_data = "/ExampleData/Gastruloid/Dataframes/"
+path_save = "/ExampleData/Output/"
 
 
-
-df_lck_42 = pd.read_csv(path_csv + "df_lck_42.csv")
-df_lck_66 = pd.read_csv(path_csv + "df_lck_66.csv")
-df_lck_90 = pd.read_csv(path_csv + "df_lck_90.csv")
+df_lck_42 = pd.read_csv(path_data + "df_lck_42.csv")
+df_lck_66 = pd.read_csv(path_data + "df_lck_66.csv")
+df_lck_90 = pd.read_csv(path_data + "df_lck_90.csv")
 
 
 df_area_42 = df_lck_42
@@ -70,6 +69,6 @@ for labelss in ticklabels:
     labelss.set_fontsize(25)
 
 plt.tight_layout()
-plt.savefig(path_save + "Major_Minor_Violin.pdf", bbox_inches = "tight")
+plt.savefig(path_save + "Gastruloid_MajorMinor_Violinplot.pdf", bbox_inches = "tight")
 plt.show()
 plt.close()

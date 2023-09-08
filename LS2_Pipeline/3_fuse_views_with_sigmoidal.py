@@ -17,6 +17,21 @@ import tifffile
 from scipy.signal import medfilt
 import concurrent.futures
 
+
+physical_size_x = 0.406
+crop = 150
+crop_pixels = int(crop/physical_size_x)
+sig_width = 20
+view_change_index = 70
+
+int_factor = 1.3
+emisson_wavelength = 0.610
+
+
+path_data = "/tungstenfs/scratch/gliberal/Users/moosfran/Manuscript_LS2/gliberal-lightsheet-2023/ExampleData/Organoid/"
+positions = ["Position 1"]
+
+
 cache_mask = None
 cache_width = None
 cache_height = None
@@ -233,20 +248,6 @@ def do_pipeline(file_name_view1, file_name_view2, file_path_fused, int_factor, p
     save_fused_with_sigmoidal(data_view1, data_view2, view_change_index, file_path_fused, int_factor, width_sigmoidal)
     
 
-
-
-physical_size_x = 0.406
-crop = 250
-crop_pixels = int(crop/physical_size_x)
-sig_width = 20
-view_change_index = 100
-
-int_factor = 1.3
-emisson_wavelength = 0.610
-
-
-path_data = "path/to/data/"
-positions = ["Position 1","Position 2"]
 
 
 # Generate mask
