@@ -28,7 +28,7 @@ int_factor = 1.3
 emisson_wavelength = 0.610
 
 
-path_data = "/tungstenfs/scratch/gliberal/Users/moosfran/Manuscript_LS2/gliberal-lightsheet-2023/ExampleData/Organoid/"
+path_data = "/ExampleData/Organoid/"
 positions = ["Position 1"]
 
 
@@ -251,7 +251,7 @@ def do_pipeline(file_name_view1, file_name_view2, file_path_fused, int_factor, p
 
 
 # Generate mask
-with concurrent.futures.ProcessPoolExecutor(max_workers=20) as executor:
+with concurrent.futures.ProcessPoolExecutor(max_workers=10) as executor:
     futures = []
     for pos in positions:
         
@@ -269,9 +269,8 @@ with concurrent.futures.ProcessPoolExecutor(max_workers=20) as executor:
             file_path_view1 = os.path.join(path_pos_view1, file_name_view1)
             file_path_view2 = os.path.join(path_pos_view2, file_name)
             file_path_fused = os.path.join(path_save_fused,savename_fused)
-            
             e = executor.submit(do_pipeline, file_path_view1, file_path_view2, file_path_fused, int_factor, physical_size_x, crop_pixels, wavelength = emisson_wavelength, width_sigmoidal = sig_width, view_change_index = view_change_index)
             futures.append(e)
     for f in futures:
-        f.results() 
+        f.result()
 
