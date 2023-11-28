@@ -5,10 +5,22 @@ Below you will find installation instructions as well as ways how to test the co
 
 ## Installation instructions
 
-To utilize the scripts is is recommended to create a virtual environment. this can be done with e.g. [conda](https://docs.conda.io/en/latest/miniconda.html) or [vitualenv](https://docs.python.org/3/library/venv.html).
+To utilize the scripts it is recommended to create a virtual environment. this can be done with e.g. [conda](https://docs.conda.io/en/latest/miniconda.html) or [vitualenv](https://docs.python.org/3/library/venv.html).
+
+We recommed using python version 3.10
+
+When using conda, you can use the following commands to generate the enviornment. 
+
+```
+conda create -n envname python=3.10
+conda activate envname
+```
+
 After creating the environment you will need to install following packages:
 
-```pip install scipy==1.10.0 seaborn==0.12.2 pandas==1.5.3 tifffile==2021.7.2 cikit-image==0.20.0.dev0 numpy==1.23.5 matplotlib==3.7.0 dipy==1.7.0```
+```
+pip install scipy==1.10.0 seaborn==0.12.2 pandas==1.5.3 tifffile==2021.7.2 scikit-image==0.20.0.dev0 numpy==1.23.5 matplotlib==3.7.0 dipy==1.7.0 cellpose==2.2 lazy_loader==0.1
+```
 
 This will take approximately 2.5 min depending on the machine you use.
 
