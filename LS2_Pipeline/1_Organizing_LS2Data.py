@@ -17,17 +17,21 @@ positions = ["Position 1"]
 folders_create = ["View1","View2","View2Reg","Fusion"]
 
 for pos in positions:
-    path_pos = path_data + pos + "/"
+    path_pos = os.path.join(path_data,pos)
     for folder in folders_create:
-        path_newfolder = path_pos + folder + "/" 
+        path_newfolder = os.path.join(path_pos,folder)
         if not os.path.isdir(path_newfolder):
             os.makedirs(path_newfolder)
-    path_cropped = path_pos + "/cropped/"
+    path_cropped = os.path.join(path_pos,"cropped")
     for file in os.listdir(path_cropped):
         if "View1" in file:
-            print(path_pos + folders_create[0] + "/" + file)
-            os.rename(path_cropped + file, path_pos + folders_create[0] + "/" + file)
+            old_place = os.path.join(path_cropped,file)
+            new_place = os.path.join(path_pos,folders_create[0],file)
+            print(new_place)
+            os.rename(old_place, new_place)
+
         if "View2" in file:
-            print(path_pos + folders_create[1] + "/" + file)
-            os.rename(path_cropped + file, path_pos + folders_create[1] + "/" + file)            
-            
+            old_place = os.path.join(path_cropped,file)
+            new_place = os.path.join(path_pos,folders_create[1],file)
+            print(new_place)
+            os.rename(old_place, new_place)
